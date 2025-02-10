@@ -11,7 +11,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
 @Path("pet")
-@Produces({"application/json", "application/xml"})
+@Produces({"application/json"})
 public class PetResource {
 
   @GET
