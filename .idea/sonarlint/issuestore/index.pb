@@ -13,8 +13,6 @@ u
 Esrc/main/java/fr/istic/taa/jaxrs/dao/generic/EntityManagerHelper.java,d\b\db64626f40ae5b5f97ae0f831f134744abd6dc35
 p
 @src/main/java/fr/istic/taa/jaxrs/dao/generic/AbstractJpaDao.java,a\5\a5d16d60a550bd9ad4759c5fd154e7ee4645f1ac
-@
-log4j.properties,7\3\7330e4252652b61093498eabc26c3cadee5d89b7
 f
 6src/main/java/fr/istic/taa/jaxrs/rest/PetResource.java,3\7\37e1cb4301468bc692df72d1e0174272e53d1434
 b
