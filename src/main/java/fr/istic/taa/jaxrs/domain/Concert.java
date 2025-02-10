@@ -1,11 +1,13 @@
 package fr.istic.taa.jaxrs.domain;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Concert {
+public class Concert implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,12 @@
 package fr.istic.taa.jaxrs.domain;
 
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Organisateur extends User {
+public class Organisateur extends User implements Serializable {
 
     @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL)
     private List<Concert> concerts;

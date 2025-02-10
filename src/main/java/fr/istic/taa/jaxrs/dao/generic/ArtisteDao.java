@@ -1,5 +1,11 @@
 package fr.istic.taa.jaxrs.dao.generic;
 
-public class ArtisteDao extends  AbstractJpaDao{
+import fr.istic.taa.jaxrs.domain.Artiste;
+
+public class ArtisteDao extends AbstractJpaDao<Long, Artiste> {
+    public ArtisteDao() {
+        super();
+        setClazz(Artiste.class);
+    }
 
 }
