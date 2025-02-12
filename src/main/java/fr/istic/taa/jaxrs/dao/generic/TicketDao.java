@@ -6,7 +6,6 @@ import fr.istic.taa.jaxrs.domain.Ticket;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
-import java.lang.classfile.instruction.TypeCheckInstruction;
 import java.util.List;
 
 public class TicketDao extends AbstractJpaDao<Long, Ticket> {
