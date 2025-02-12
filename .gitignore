@@ -1,0 +1,34 @@
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs (IntelliJ, PyCharm, WebStorm...)
+.idea/
+*.iml
+.idea/sonarlint/issuestore/index.pb
+.idea/sonarlint/securityhotspotstore/index.pb
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+
+# Emacs
+*~
+.#*
+
+# NetBeans
+nbproject/
+
+# Others
+.DS_Store  # macOS metadata files
+Thumbs.db  # Windows metadata files
