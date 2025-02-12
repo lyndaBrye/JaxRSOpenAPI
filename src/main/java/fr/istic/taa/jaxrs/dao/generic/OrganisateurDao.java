@@ -8,4 +8,5 @@ public class OrganisateurDao extends  AbstractJpaDao<Long, Organisateur>{
         super();
         setClazz(Organisateur.class);
     }
+
 }
