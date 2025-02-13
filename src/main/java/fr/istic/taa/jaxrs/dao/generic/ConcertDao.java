@@ -14,7 +14,7 @@ import java.util.List;
 
 
 
-      
+
 
         public List<Concert> findAllOrderedByDate() {
             TypedQuery<Concert> query = entityManager.createQuery("SELECT c FROM Concert c ORDER BY c.date", Concert.class);
