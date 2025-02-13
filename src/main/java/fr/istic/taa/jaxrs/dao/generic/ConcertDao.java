@@ -12,17 +12,9 @@ import java.util.List;
             setClazz(Concert.class);
         }
 
-        public List<Concert> findByLieu(String lieu) {
-            TypedQuery<Concert> query = entityManager.createQuery("SELECT c FROM Concert c WHERE c.lieu = :lieu", Concert.class);
-            query.setParameter("lieu", lieu);
-            return query.getResultList();
-        }
 
-        public <LocalDate> List<Concert> findByDate(LocalDate date) {
-            TypedQuery<Concert> query = entityManager.createQuery("SELECT c FROM Concert c WHERE c.date = :date", Concert.class);
-            query.setParameter("date", date);
-            return query.getResultList();
-        }
+
+      
 
         public List<Concert> findAllOrderedByDate() {
             TypedQuery<Concert> query = entityManager.createQuery("SELECT c FROM Concert c ORDER BY c.date", Concert.class);
