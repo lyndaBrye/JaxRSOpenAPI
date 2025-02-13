@@ -6,3 +6,5 @@ java:S5164
 "!Call "remove()" on "threadLocal".(¬Êä‘øÿÿÿÿ
 U
 java:S1118":Add a private constructor to hide the implicit public one.(˜•¯ôüÿÿÿÿ
+H
+java:S5164"&Use "remove()" instead of "set(null)".(ü€Ê„úÿÿÿÿ8òÜ½úÏ2

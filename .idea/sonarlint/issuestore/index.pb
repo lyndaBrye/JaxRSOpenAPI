@@ -43,3 +43,7 @@ Z
 *src/main/java/fr/istic/taa/jaxrs/Main.java,6\2\6290c1af4e1daf038c6d31b758879e67c1ba17ba
 k
 ;src/main/java/fr/istic/taa/jaxrs/dao/generic/TicketDao.java,5\8\58ff0ab02b3649621b495797e820567ad6c59f15
+E
+run-hsqldb-server.bat,0\1\01d808f0955e2423749b1b8935510831def5dd96
+a
+1src/main/java/fr/istic/taa/jaxrs/domain/User.java,f\e\fe60d6ce41094af95d440bee22ad40aa7f0d8954
