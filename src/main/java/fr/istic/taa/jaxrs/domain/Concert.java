@@ -8,7 +8,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,8 @@ public class Concert implements Serializable {
     private Long id;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")  // Format personnalisé pour LocalDate
-    private LocalDate date;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime date;
 
     private String lieu;
     private int capacity;
@@ -39,7 +40,7 @@ public class Concert implements Serializable {
     public Concert() {
     }
 
-    public Concert(LocalDate date, String lieu, int capacity) {
+    public Concert(LocalDateTime date, String lieu, int capacity) {
         this.date = date;
         this.lieu = lieu;
         this.capacity = capacity;
@@ -53,11 +54,11 @@ public class Concert implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -29,6 +29,7 @@ public class UserRessource {
 
     // Récupérer tous les utilisateurs
     @GET
+    @Path("/all")
     public Response getAllUsers() {
         List<User> users = userDao.findAll();
         return Response.ok(users).build();

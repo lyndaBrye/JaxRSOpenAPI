@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaTest {
@@ -55,7 +56,7 @@ public class JpaTest {
 		manager.persist(artiste);
 
 		// Création d'un concert et liaison avec artiste + organisateur
-		Concert concert = new Concert( LocalDate.now(), "Paris", 5000);
+		Concert concert = new Concert( LocalDateTime.now(), "Paris", 5000);
 		concert.setArtiste(artiste); // 🔹 Associe l’artiste au concert
 		concert.setOrganisateur(organisateur); // 🔹 Associe l'organisateur
 		manager.persist(concert);
