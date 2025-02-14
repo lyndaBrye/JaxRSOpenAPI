@@ -32,3 +32,6 @@ nbproject/
 # Others
 .DS_Store  # macOS metadata files
 Thumbs.db  # Windows metadata files
+
+data/
+target
