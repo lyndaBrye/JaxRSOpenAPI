@@ -1,4 +1,6 @@
 
-t
-java:S2293""YReplace the type specification in this constructor call with the diamond operator ("<>").(÷³¸åøÿÿÿÿ
-P	java:S125&"<This block of commented-out lines of code should be removed.(óÅ’
+{
+java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(÷³¸åøÿÿÿÿ8íêˆĞ2
+]	java:S125)"<This block of commented-out lines of code should be removed.(˜ùìŞûÿÿÿÿ8üêˆĞ2
+b
+java:S1128"@Remove this unused import 'fr.istic.taa.jaxrs.rest.PetResource'.(Ê·§¬ûÿÿÿÿ8üêˆĞ2

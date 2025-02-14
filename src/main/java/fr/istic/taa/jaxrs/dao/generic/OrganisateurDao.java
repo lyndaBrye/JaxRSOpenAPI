@@ -1,6 +1,7 @@
 package fr.istic.taa.jaxrs.dao.generic;
 
 import fr.istic.taa.jaxrs.domain.Organisateur;
+import fr.istic.taa.jaxrs.domain.User;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.NoResultException;
 
@@ -10,6 +11,7 @@ public class OrganisateurDao extends AbstractJpaDao<Long, Organisateur> {
 
     public OrganisateurDao() {
         super();
+        setClazz(Organisateur.class);
 
     }
 

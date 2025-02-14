@@ -14,6 +14,7 @@ import java.util.List;
 public class UserDao extends  AbstractJpaDao<Long, User> {
     public UserDao() {
         super();
+        setClazz(User.class);
 
     }
     public User authenticate(String username, String password) {
