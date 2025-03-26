@@ -1,6 +1,4 @@
 
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 e
 5src/main/java/fr/istic/taa/jaxrs/TestApplication.java,0\4\04d5e3a8d070e98ecc014d20dfee85e8cd7e0b26
 `
@@ -69,3 +67,12 @@ k
 :
 
 READ-ME.md,0\a\0a02419b440c75dcd55c762057d682ab3ca4d2f2
+:
+
+README2.md,6\e\6eb16a5dc45765f5cb169ebe3ceefdbd369ffa80
+a
+1src/main/java/fr/istic/taa/jaxrs/DTO/UserDTO.java,7\b\7bd77eff1a353367271b6a2463cc4744e52766a3
+j
+:src/main/java/fr/istic/taa/jaxrs/rest/ConcertResource.java,8\0\807a2fcd91ad3a4b06517bdecdb811f2fb66779e
+j
+:src/main/java/fr/istic/taa/jaxrs/rest/ArtisteResource.java,c\1\c1a09eba1c12a3046046bd8927a81a8dbc6ba3ed

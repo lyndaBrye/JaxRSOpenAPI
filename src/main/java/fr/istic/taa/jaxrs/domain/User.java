@@ -126,4 +126,8 @@ public class User implements Serializable {
                 ", sexe=" + sexe +
                 '}';
     }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
 }

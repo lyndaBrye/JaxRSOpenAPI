@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Utilisateurs</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 80%; margin: auto; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+    </style>
 </head>
 <body>
+
+<h1>Liste des Utilisateurs</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+    </tr>
+    </thead>
+    <tbody id="userTableBody">
+    <!-- Les utilisateurs seront affichés ici -->
+    </tbody>
+</table>
+
+<script>
+    async function fetchUsers() {
+        try {
+            const response = await fetch("http://localhost:8080/users/all");
+            if (!response.ok) throw new Error("Erreur lors de la récupération des utilisateurs");
+
+            const users = await response.json();
+            const tableBody = document.getElementById("userTableBody");
+            tableBody.innerHTML = ""; // Vider le tableau avant d'ajouter les nouvelles données
+
+            users.forEach(user => {
+                const row = `<tr>
+                        <td>${user.id}</td>
+                        <td>${user.nom}</td>
+                        <td>${user.prenom}</td>
+                        <td>${user.email}</td>
+                        <td>${user.tel}</td>
+                    </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+        } catch (error) {
+            console.error("Erreur:", error);
+        }
+    }
+
+    // Charger la liste des utilisateurs au chargement de la page
+    window.onload = fetchUsers;
+</script>
 
 </body>
 </html>
