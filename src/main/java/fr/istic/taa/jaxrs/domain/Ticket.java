@@ -25,6 +25,7 @@ public class Ticket implements Serializable {
 
 
     public Ticket(double prix, Concert concert, User user) {
+
         this.user = user;
         this.concert = concert;
         this.prix = prix;
@@ -45,6 +46,21 @@ public class Ticket implements Serializable {
 
     public void setPrix(double prix) {
         this.prix = prix;
+    }
+    public Concert getConcert() {
+        return concert;
+    }
+
+    public void setConcert(Concert concert) {
+        this.concert = concert;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

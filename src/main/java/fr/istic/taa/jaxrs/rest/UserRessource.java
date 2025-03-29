@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.DTO.TicketDTO;
 import fr.istic.taa.jaxrs.DTO.UserDTO;
 import fr.istic.taa.jaxrs.dao.generic.UserDao;
 import fr.istic.taa.jaxrs.domain.Ticket;
@@ -34,7 +35,6 @@ public class UserRessource {
         return Response.ok(userDTO).build(); // Retourner le DTO dans la réponse
     }
 
-
     @GET
     @Path("/all")
     public Response getAllUsers() {
@@ -43,32 +43,13 @@ public class UserRessource {
             return Response.status(Response.Status.NOT_FOUND).entity("Aucun utilisateur trouvé").build();
         }
 
-        // Transforme chaque utilisateur en un UserDTO
-        List<UserDTO> userDTOs = users.stream()
-                .map(user -> {
-                    // Récupérer les tickets pour chaque utilisateur
-                    List<Ticket> tickets = userDao.getTicketsByUserId(user.getId());
-
-                    // Créer un UserDTO à partir de l'utilisateur
-                    UserDTO userDTO = new UserDTO(user);
-
-                    // Transformer les tickets en IDs et les ajouter dans le UserDTO
-                    List<Long> ticketIds = tickets.stream()
-                            .map(Ticket::getId) // Transformer chaque ticket en son ID
-                            .collect(Collectors.toList());
-
-                    // Ajouter les ticketIds dans le DTO
-                    userDTO.setTicketIds(ticketIds); // Le nom de la méthode est setTicketIds, pas setTicket
-
-                    return userDTO;  // Retourner l'utilisateur DTO avec les tickets associés
-                })
+        // Transformation en DTO
+        List<UserDTO> userDTOS = users.stream()
+                .map(UserDTO::new) // Utilise directement le constructeur TicketDTO(Ticket)
                 .collect(Collectors.toList());
 
-        // Retourner les UserDTOs avec leurs tickets
-        return Response.ok(userDTOs).build();  // On renvoie la liste des DTOs, pas les entités User
+        return Response.ok(userDTOS).build();
     }
-
-
 
     // Ajouter un nouvel utilisateur
     @POST
@@ -85,15 +66,24 @@ public class UserRessource {
     // ca met bien a jour tout les utilisateurs sauf que si on rempli pas tout les champs il met vide les champs manquants
     @PUT
     @Path("/{userId}")
-    public Response updateUser(@PathParam("userId") Long userId, User user) {
+    public Response updateUser(@PathParam("userId") Long userId, UserDTO userDTO) {
+        // Vérifier si l'utilisateur existe déjà dans la base de données
         User existing = userDao.findOne(userId);
         if (existing == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }
-        user.setId(userId); // Assure que l'ID ne change pas
-        userDao.update(user);
+
+        // Convertir le DTO en entité User et mettre à jour les champs existants
+        User updatedUser = userDTO.toEntity(userId, existing);
+
+        // Sauvegarder l'utilisateur mis à jour
+        userDao.update(updatedUser);
+
+        // Retourner une réponse indiquant que la mise à jour a réussi
         return Response.ok("Utilisateur mis à jour avec succès").build();
     }
+
+
 
     // Supprimer un utilisateur
     @DELETE

@@ -36,18 +36,38 @@ public class UserDTO {
 
 
     // Méthode pour convertir un DTO en User (utile pour POST / PUT)
-    public User toEntity() {
-        User user = new User();
-        user.setId(this.id);
-        user.setNom(this.nom);
-        user.setPrenom(this.prenom);
-        user.setEmail(this.email);
-        user.setTel(this.tel);
-        user.setAge(this.age);
-        user.setSexe(Sexe.valueOf(this.sexe)); // Convertir string en Enum
-        // Pour les tickets, il faudra récupérer les entités depuis les IDs dans le service
-        return user;
+    public User toEntity(Long userId, User existingUser) {
+        if (existingUser == null) {
+            existingUser = new User(); // Si l'utilisateur n'existe pas, on crée un nouvel utilisateur
+        }
+
+        // Assurer que l'ID reste le même
+        existingUser.setId(userId);
+
+        // Mettre à jour les champs non null du DTO
+        if (this.nom != null) {
+            existingUser.setNom(this.nom);
+        }
+        if (this.prenom != null) {
+            existingUser.setPrenom(this.prenom);
+        }
+        if (this.email != null) {
+            existingUser.setEmail(this.email);
+        }
+        if (this.tel != null) {
+            existingUser.setTel(this.tel);
+        }
+        if (this.age != 0) { // Vérifier l'âge seulement si non zéro
+            existingUser.setAge(this.age);
+        }
+        if (this.sexe != null) {
+            existingUser.setSexe(Sexe.valueOf(this.sexe)); // Assurez-vous que l'énumération Sexe est bien définie
+        }
+
+        // Retourner l'entité mise à jour
+        return existingUser;
     }
+
 
     // ✅ Getters et Setters
     public Long getId() {

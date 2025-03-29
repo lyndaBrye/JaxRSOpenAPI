@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.domain;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class User implements Serializable {
     private String password;
     private int age;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<Ticket> tickets=new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Sexe sexe;
@@ -130,4 +131,5 @@ public class User implements Serializable {
     public List<Ticket> getTickets() {
         return tickets;
     }
+
 }
