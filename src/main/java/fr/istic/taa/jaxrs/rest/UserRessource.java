@@ -25,6 +25,8 @@ public class UserRessource {
     @Path("/{userId}")
     public Response getUserById(@PathParam("userId") Long userId) {
         User user = userDao.findOne(userId);
+        System.out.println(user.toString()+"sdfghjhklfghjk");
+
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }

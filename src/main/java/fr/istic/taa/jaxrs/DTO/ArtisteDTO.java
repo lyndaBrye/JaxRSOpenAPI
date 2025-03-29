@@ -1,38 +1,43 @@
-package fr.istic.taa.jaxrs.domain;
+package fr.istic.taa.jaxrs.DTO;
 
-import jakarta.persistence.*;
-
+import fr.istic.taa.jaxrs.domain.Artiste;
 import java.io.Serializable;
 
-@Entity
-public class Artiste implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ArtisteDTO{
     private Long id;
-
     private String nom;
-
     private String prenom;
-
-
-
     private String biographie;
 
-    @OneToOne(mappedBy = "artiste", cascade = CascadeType.ALL)
-    private Concert concert;
-    public Artiste() {
+    // ✅ Constructeur par défaut
+    public ArtisteDTO() {
     }
 
-
-    public Artiste(String nom, String prenom, String biographie) {
+    // ✅ Constructeur avec paramètres
+    public ArtisteDTO(Long id, String nom, String prenom, String biographie) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.biographie = biographie;
-
     }
 
-    // 🔹 Getters et Setters
+    // ✅ Constructeur à partir de l'entité `Artiste`
+    public ArtisteDTO(Artiste artiste) {
+        if (artiste != null) {
+            this.id = artiste.getId();
+            this.nom = artiste.getNom();
+            this.prenom = artiste.getPrenom();
+            this.biographie = artiste.getBiographie();
+        }
+    }
+
+    // ✅ Conversion DTO → Entité
+    public Artiste toEntity() {
+
+        return new Artiste(this.nom, this.prenom, this.biographie);
+    }
+
+    // ✅ Getters et Setters
     public Long getId() {
         return id;
     }
@@ -48,6 +53,7 @@ public class Artiste implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
     public String getPrenom() {
         return prenom;
     }
@@ -55,6 +61,7 @@ public class Artiste implements Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
     public String getBiographie() {
         return biographie;
     }
@@ -63,10 +70,10 @@ public class Artiste implements Serializable {
         this.biographie = biographie;
     }
 
-    // 🔹 Méthode toString() pour affichage/logging
+    // ✅ Méthode toString() utile pour le logging
     @Override
     public String toString() {
-        return "Artiste{" +
+        return "ArtisteDTO{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
