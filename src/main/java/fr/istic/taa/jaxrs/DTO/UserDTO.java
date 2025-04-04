@@ -2,6 +2,9 @@ package fr.istic.taa.jaxrs.DTO;
 
 import fr.istic.taa.jaxrs.domain.Sexe;
 import fr.istic.taa.jaxrs.domain.User;
+import fr.istic.taa.jaxrs.domain.Ticket;
+import fr.istic.taa.jaxrs.dao.generic.TicketDao;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,9 +37,8 @@ public class UserDTO {
                 .collect(Collectors.toList());
     }
 
-
     // Méthode pour convertir un DTO en User (utile pour POST / PUT)
-    public User toEntity(Long userId, User existingUser) {
+    public User toEntity(Long userId, User existingUser,TicketDao ticketDao) {
         if (existingUser == null) {
             existingUser = new User(); // Si l'utilisateur n'existe pas, on crée un nouvel utilisateur
         }
@@ -64,10 +66,9 @@ public class UserDTO {
             existingUser.setSexe(Sexe.valueOf(this.sexe)); // Assurez-vous que l'énumération Sexe est bien définie
         }
 
-        // Retourner l'entité mise à jour
+       // Retourner l'entité mise à jour
         return existingUser;
     }
-
 
     // ✅ Getters et Setters
     public Long getId() {

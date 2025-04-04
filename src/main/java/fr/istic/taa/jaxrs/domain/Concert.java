@@ -8,8 +8,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +18,7 @@ public class Concert implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -25,25 +26,29 @@ public class Concert implements Serializable {
 
     private String lieu;
     private int capacity;
+    private double prix;  // ✅ Ajout du prix
 
     @OneToOne
     @JoinColumn(name = "artiste_id")
     private Artiste artiste;
 
-    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
+
 
     @ManyToOne
-    @JoinColumn(name = "organisateur_id")  // Clé étrangère en DB
+    @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 
     public Concert() {
     }
 
-    public Concert(LocalDateTime date, String lieu, int capacity) {
+    // ✅ Modification du constructeur pour inclure le prix
+    public Concert(LocalDateTime date, String lieu, int capacity, double prix) {
         this.date = date;
         this.lieu = lieu;
         this.capacity = capacity;
+        this.prix = prix;
     }
 
     public Long getId() {
@@ -78,6 +83,14 @@ public class Concert implements Serializable {
         this.capacity = capacity;
     }
 
+    public double getPrix() {  // ✅ Getter pour prix
+        return prix;
+    }
+
+    public void setPrix(double prix) {  // ✅ Setter pour prix
+        this.prix = prix;
+    }
+
     public Artiste getArtiste() {
         return artiste;
     }
@@ -109,6 +122,7 @@ public class Concert implements Serializable {
                 ", date=" + date +
                 ", lieu='" + lieu + '\'' +
                 ", capacity=" + capacity +
+                ", prix=" + prix +  // ✅ Ajout du prix dans le toString()
                 ", artiste=" + artiste +
                 ", tickets=" + tickets +
                 ", organisateur=" + organisateur +

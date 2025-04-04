@@ -78,7 +78,7 @@ public class TicketRessource {
         }
 
         // Créer le ticket avec un utilisateur null si non spécifié
-        Ticket ticket = new Ticket(ticketDTO.getPrix(), concert, user);
+        Ticket ticket = new Ticket (concert, user);
 
         // Sauvegarder le ticket dans la base de données
         ticketDao.save(ticket);
@@ -138,6 +138,7 @@ public class TicketRessource {
         if (existing == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Ticket non trouvé").build();
         }
+        existing.setConcert(null);
         ticketDao.deleteById(ticketId);
         return Response.ok("Ticket supprimé avec succès").build();
     }

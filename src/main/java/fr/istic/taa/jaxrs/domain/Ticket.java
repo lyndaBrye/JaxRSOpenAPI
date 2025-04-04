@@ -11,7 +11,6 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double prix;
     @ManyToOne
     @JoinColumn(name = "concert_id")
     private Concert concert;
@@ -23,14 +22,10 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-
-    public Ticket(double prix, Concert concert, User user) {
-
-        this.user = user;
+    public Ticket(Concert concert, User user) {
         this.concert = concert;
-        this.prix = prix;
+        this.user = user;
     }
-
 
     public Long getId() {
         return id;
@@ -40,13 +35,6 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
     public Concert getConcert() {
         return concert;
     }
@@ -67,7 +55,8 @@ public class Ticket implements Serializable {
     public String toString() {
         return "Ticket{" +
                 "id=" + id +
-                ", prix=" + prix +
+                ", concert=" + (concert != null ? concert.getId() : "null") +
+                ", user=" + (user != null ? user.getId() : "null") +
                 '}';
     }
 }

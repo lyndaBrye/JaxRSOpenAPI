@@ -1,31 +1,69 @@
 package fr.istic.taa.jaxrs.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import fr.istic.taa.jaxrs.domain.Concert;
 import fr.istic.taa.jaxrs.domain.Artiste;
 import fr.istic.taa.jaxrs.domain.Organisateur;
-import fr.istic.taa.jaxrs.domain.Ticket;
-import jakarta.persistence.*;
-
-import java.io.Serializable;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
 
 public class ConcertDTO {
 
     private Long id;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
-
     private String lieu;
     private int capacity;
     private Long artiste_id;
+    private Long organisateur_id;
+    private double prix; // Ajout du prix
 
+    // 🔹 Constructeur par défaut (nécessaire pour la désérialisation JSON)
+    public ConcertDTO() {}
+
+    // 🔹 Constructeur pour convertir une entité `Concert` en DTO
+    public ConcertDTO(Concert concert) {
+        if (concert != null) {
+            this.id = concert.getId();
+            this.date = concert.getDate();
+            this.lieu = concert.getLieu();
+            this.capacity = concert.getCapacity();
+            this.artiste_id = (concert.getArtiste() != null) ? concert.getArtiste().getId() : null;
+            this.organisateur_id = (concert.getOrganisateur() != null) ? concert.getOrganisateur().getId() : null;
+            this.prix = concert.getPrix();
+        }
+    }
+
+    // 🔹 Convertir le DTO en `Concert` (Mettre à jour un concert existant en conservant les anciennes valeurs)
+    public Concert toEntity(Concert existingConcert, Artiste artiste, Organisateur organisateur) {
+        if (existingConcert == null) {
+            existingConcert = new Concert(); // Si l'entité n'existe pas, en créer une nouvelle
+        }
+
+        // Mise à jour des champs uniquement s'ils ne sont pas nuls
+        if (this.date != null) {
+            existingConcert.setDate(this.date);
+        }
+        if (this.lieu != null) {
+            existingConcert.setLieu(this.lieu);
+        }
+        if (this.capacity > 0) { // Vérifier si capacity est valide avant de modifier
+            existingConcert.setCapacity(this.capacity);
+        }
+        if (artiste != null) {
+            existingConcert.setArtiste(artiste);
+        }
+        if (organisateur != null) {
+            existingConcert.setOrganisateur(organisateur);
+        }
+        if(this.prix!=0){
+            existingConcert.setPrix(prix);
+        }
+
+        return existingConcert;
+    }
+
+    // 🔹 Getters et Setters
     public Long getId() {
         return id;
     }
@@ -64,5 +102,21 @@ public class ConcertDTO {
 
     public void setArtiste_id(Long artiste_id) {
         this.artiste_id = artiste_id;
+    }
+
+    public Long getOrganisateur_id() {
+        return organisateur_id;
+    }
+
+    public void setOrganisateur_id(Long organisateur_id) {
+        this.organisateur_id = organisateur_id;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
     }
 }

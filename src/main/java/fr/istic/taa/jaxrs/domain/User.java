@@ -21,15 +21,16 @@ public class User implements Serializable {
     private String tel;
     private String password;
     private int age;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Ticket> tickets=new ArrayList<>();
+
+    // La relation OneToMany pour les tickets de l'utilisateur
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Ticket> tickets = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Sexe sexe;
 
     public User() {
     }
-
 
     public User(String nom, String prenom, String codePostal, String email, String tel, String password, int age, Sexe sexe) {
         this.nom = nom;
@@ -113,6 +114,19 @@ public class User implements Serializable {
     public void setSexe(Sexe sexe) {
         this.sexe = sexe;
     }
+
+    // Ajout d'un ticket à la liste des tickets de l'utilisateur
+    public void addTicket(Ticket ticket) {
+        if (ticket != null && !this.tickets.contains(ticket)) {
+            this.tickets.add(ticket);
+        }
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    // Représentation sous forme de chaîne pour une meilleure lisibilité
     @Override
     public String toString() {
         return "User{" +
@@ -127,9 +141,4 @@ public class User implements Serializable {
                 ", sexe=" + sexe +
                 '}';
     }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
 }

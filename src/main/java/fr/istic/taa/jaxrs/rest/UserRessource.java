@@ -2,6 +2,7 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.DTO.TicketDTO;
 import fr.istic.taa.jaxrs.DTO.UserDTO;
+import fr.istic.taa.jaxrs.dao.generic.TicketDao;
 import fr.istic.taa.jaxrs.dao.generic.UserDao;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.User;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserRessource {
 
     private UserDao userDao = new UserDao();
+    private TicketDao ticketDao = new TicketDao();
 
 
     // Récupérer un utilisateur par ID
@@ -61,9 +63,6 @@ public class UserRessource {
         userDao.save(user);
         return Response.status(Response.Status.CREATED).entity("Utilisateur ajouté avec succès").build();
     }
-
-    // Mettre à jour un utilisateur
-    // ca met bien a jour tout les utilisateurs sauf que si on rempli pas tout les champs il met vide les champs manquants
     @PUT
     @Path("/{userId}")
     public Response updateUser(@PathParam("userId") Long userId, UserDTO userDTO) {
@@ -74,7 +73,7 @@ public class UserRessource {
         }
 
         // Convertir le DTO en entité User et mettre à jour les champs existants
-        User updatedUser = userDTO.toEntity(userId, existing);
+        User updatedUser = userDTO.toEntity(userId, existing,ticketDao);
 
         // Sauvegarder l'utilisateur mis à jour
         userDao.update(updatedUser);
@@ -96,4 +95,25 @@ public class UserRessource {
         userDao.deleteById(userId);
         return Response.ok("Utilisateur supprimé avec succès").build();
     }
+    @POST
+    @Path("/{userId}/tickets/{concertId}")
+    public Response assignTicketToUser(@PathParam("userId") Long userId, @PathParam("concertId") Long concertId) {
+        User user = userDao.findOne(userId);
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
+        }
+
+        List<Ticket> availableTickets = ticketDao.findAvailableTicketsByConcertId(concertId);
+        if (availableTickets.isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Aucun ticket disponible pour ce concert").build();
+        }
+
+        // On prend le premier ticket libre et on l’assigne
+        Ticket ticketToAssign = availableTickets.get(0);
+        ticketToAssign.setUser(user);
+        ticketDao.update(ticketToAssign);
+
+        return Response.ok(new TicketDTO(ticketToAssign)).build();
+    }
+
 }
