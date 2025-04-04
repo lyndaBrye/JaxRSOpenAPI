@@ -60,16 +60,5 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 	}
 
 
-	public List<T> findByField(String fieldName, Object value) {
-		return entityManager.createQuery(
-						"SELECT e FROM " + clazz.getSimpleName() + " e WHERE e." + fieldName + " = :value", clazz)
-				.setParameter("value", value)
-				.getResultList();
-	}
-	public long count() {
-		return entityManager.createQuery(
-						"SELECT COUNT(e) FROM " + clazz.getSimpleName() + " e", Long.class)
-				.getSingleResult();
-	}
 
 }

@@ -23,7 +23,7 @@ public class User implements Serializable {
     private int age;
 
     // La relation OneToMany pour les tickets de l'utilisateur
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Ticket> tickets = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

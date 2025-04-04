@@ -92,9 +92,19 @@ public class UserRessource {
         if (existing == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }
+
+        // Libérer tous les tickets de l'utilisateur
+        List<Ticket> userTickets = existing.getTickets();
+        for (Ticket ticket : userTickets) {
+            ticket.setUser(null); // Libère le ticket
+            ticketDao.update(ticket); // Mise à jour dans la base
+        }
+
+        // Supprimer l'utilisateur
         userDao.deleteById(userId);
-        return Response.ok("Utilisateur supprimé avec succès").build();
+        return Response.ok("Utilisateur supprimé et tickets libérés").build();
     }
+
     @POST
     @Path("/{userId}/tickets/{concertId}")
     public Response assignTicketToUser(@PathParam("userId") Long userId, @PathParam("concertId") Long concertId) {
