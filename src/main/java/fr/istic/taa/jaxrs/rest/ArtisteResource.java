@@ -30,10 +30,8 @@ public class ArtisteResource {
                             content = @Content(schema = @Schema(implementation = ArtisteDTO.class))),
                     @ApiResponse(responseCode = "404", description = "Artiste non trouvé")
             })
-    public Response getArtisteById(@Parameter(description = "ID de l'artiste", required = true) @PathParam("id") Long id) {
-        System.out.println(id);
+    public Response getArtisteById( @PathParam("id") Long id) {
         Artiste artiste = artisteDao.findOne(id);
-        System.out.println(artiste.toString()+"hello  ggggggggggff");
         if (artiste == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Artiste non trouvé").build();
         }

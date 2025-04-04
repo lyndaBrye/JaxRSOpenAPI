@@ -9,11 +9,11 @@ public class ArtisteDTO{
     private String prenom;
     private String biographie;
 
-    // ✅ Constructeur par défaut
+    // Constructeur par défaut
     public ArtisteDTO() {
     }
 
-    // ✅ Constructeur avec paramètres
+    // Constructeur avec paramètres
     public ArtisteDTO(Long id, String nom, String prenom, String biographie) {
         this.id = id;
         this.nom = nom;
@@ -21,7 +21,7 @@ public class ArtisteDTO{
         this.biographie = biographie;
     }
 
-    // ✅ Constructeur à partir de l'entité `Artiste`
+    // Constructeur à partir de l'entité `Artiste`
     public ArtisteDTO(Artiste artiste) {
         if (artiste != null) {
             this.id = artiste.getId();
@@ -31,13 +31,13 @@ public class ArtisteDTO{
         }
     }
 
-    // ✅ Conversion DTO → Entité
+    // Conversion DTO → Entité
     public Artiste toEntity() {
 
         return new Artiste(this.nom, this.prenom, this.biographie);
     }
 
-    // ✅ Getters et Setters
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -70,7 +70,7 @@ public class ArtisteDTO{
         this.biographie = biographie;
     }
 
-    // ✅ Méthode toString() utile pour le logging
+    // Méthode toString() utile pour le logging
     @Override
     public String toString() {
         return "ArtisteDTO{" +
