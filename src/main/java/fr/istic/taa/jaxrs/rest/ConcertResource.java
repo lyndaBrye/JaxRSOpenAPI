@@ -114,6 +114,7 @@ public class ConcertResource {
 
         Concert concert = concertDao.findOne(id); // Récupère le concert par son ID
         if (concert != null) {
+            concert.setOrganisateur(null);
             concertDao.deleteById(id);
             return Response.ok("Concert supprimé avec succès").build();
         } else {

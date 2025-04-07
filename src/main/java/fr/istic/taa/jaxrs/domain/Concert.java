@@ -35,6 +35,17 @@ public class Concert implements Serializable {
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
 
+    @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Concert> concerts = new ArrayList<>();
+
+    public List<Concert> getConcerts() {
+        return concerts;
+    }
+
+    public void addConcert(Concert concert) {
+        concerts.add(concert);
+        concert.setOrganisateur(this.organisateur);
+    }
 
     @ManyToOne
     @JoinColumn(name = "organisateur_id")

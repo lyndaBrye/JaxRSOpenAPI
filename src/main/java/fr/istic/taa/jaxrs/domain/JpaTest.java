@@ -46,10 +46,12 @@ public class JpaTest {
 	}
 
 	private void createData() {
-
+		Concert concert1 = new Concert(LocalDate.now().atStartOfDay(), "Lyon", 1000, 50);
+		manager.persist(concert1);
 		// Organisateurs
 		Organisateur organisateur1 = new Organisateur("John", "Doe", "75000", "john.doe@email.com", "123456789", "password123", 25, Sexe.HOMME);
 		manager.persist(organisateur1);
+		organisateur1.getConcerts().add(concert1);
 
 
 		// Artistes
@@ -58,6 +60,7 @@ public class JpaTest {
 
 
 		// Concerts et liaisons avec les artistes et organisateurs
+
 
 	}
 

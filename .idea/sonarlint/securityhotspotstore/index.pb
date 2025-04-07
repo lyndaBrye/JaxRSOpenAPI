@@ -82,3 +82,5 @@ j
 :src/main/java/fr/istic/taa/jaxrs/config/JacksonConfig.java,0\8\0811f7ec8022f5b7f0291a8bbe9858e9bfbe89cf
 ]
 -.idea/httpRequests/2025-03-31T112039.500.json,2\b\2b5081854ee78e02502433fd40010daeb2b67297
+`
+0src/main/java/fr/istic/taa/jaxrs/CORSFilter.java,c\2\c21f10a23d807db014cfcd705e398c20084c521a

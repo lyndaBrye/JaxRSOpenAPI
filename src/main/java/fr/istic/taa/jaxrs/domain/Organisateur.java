@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class Organisateur extends User implements Serializable {
 
-    @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organisateur")
     private List<Concert> concerts;
 
     // 🔹 Constructeurs
