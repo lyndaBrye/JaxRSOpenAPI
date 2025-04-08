@@ -26,35 +26,22 @@ public class Concert implements Serializable {
 
     private String lieu;
     private int capacity;
-    private double prix;  // ✅ Ajout du prix
+    private double prix;
 
     @OneToOne
     @JoinColumn(name = "artiste_id")
     private Artiste artiste;
 
-    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets = new ArrayList<>();
-
-    @OneToMany(mappedBy = "organisateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Concert> concerts = new ArrayList<>();
-
-    public List<Concert> getConcerts() {
-        return concerts;
-    }
-
-    public void addConcert(Concert concert) {
-        concerts.add(concert);
-        concert.setOrganisateur(this.organisateur);
-    }
-
     @ManyToOne
     @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 
+    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
+
     public Concert() {
     }
 
-    // ✅ Modification du constructeur pour inclure le prix
     public Concert(LocalDateTime date, String lieu, int capacity, double prix) {
         this.date = date;
         this.lieu = lieu;
@@ -94,11 +81,11 @@ public class Concert implements Serializable {
         this.capacity = capacity;
     }
 
-    public double getPrix() {  // ✅ Getter pour prix
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {  // ✅ Setter pour prix
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
@@ -110,20 +97,20 @@ public class Concert implements Serializable {
         this.artiste = artiste;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
     public Organisateur getOrganisateur() {
         return organisateur;
     }
 
     public void setOrganisateur(Organisateur organisateur) {
         this.organisateur = organisateur;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override
@@ -133,10 +120,9 @@ public class Concert implements Serializable {
                 ", date=" + date +
                 ", lieu='" + lieu + '\'' +
                 ", capacity=" + capacity +
-                ", prix=" + prix +  // ✅ Ajout du prix dans le toString()
-                ", artiste=" + artiste +
-                ", tickets=" + tickets +
-                ", organisateur=" + organisateur +
+                ", prix=" + prix +
+                ", artiste=" + (artiste != null ? artiste.getNom() : "null") +
+                ", organisateur=" + (organisateur != null ? organisateur.getNom() : "null") +
                 '}';
     }
 }

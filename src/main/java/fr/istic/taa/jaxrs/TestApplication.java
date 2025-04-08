@@ -39,7 +39,7 @@ public class TestApplication extends Application {
         clazzes.add(UserRessource.class);
         clazzes.add(ArtisteResource.class);
         clazzes.add(ConcertResource .class);
-        //clazzes.add(PetResource.class);
+        clazzes.add(OrganisateurRessource.class);
         clazzes.add(AcceptHeaderOpenApiResource.class);
          
 

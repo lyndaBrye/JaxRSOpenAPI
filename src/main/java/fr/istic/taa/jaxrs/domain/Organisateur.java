@@ -1,34 +1,53 @@
 package fr.istic.taa.jaxrs.domain;
 
 import jakarta.persistence.*;
-
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Organisateur extends User implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class Organisateur extends User {
 
     @OneToMany(mappedBy = "organisateur")
-    private List<Concert> concerts;
+    private List<Concert> concerts = new ArrayList<>();
 
-    // 🔹 Constructeurs
     public Organisateur() {
+        super();
     }
 
     public Organisateur(String nom, String prenom, String codePostal, String email, String tel, String password, int age, Sexe sexe) {
         super(nom, prenom, codePostal, email, tel, password, age, sexe);
     }
 
-    // 🔹 Getters et Setters
-    public List<Concert> getConcerts() { return concerts; }
-    public void setConcerts(List<Concert> concerts) { this.concerts = concerts; }
+    public List<Concert> getConcerts() {
+        return concerts;
+    }
+
+    public void setConcerts(List<Concert> concerts) {
+        this.concerts = concerts;
+    }
+
+    public void addConcert(Concert concert) {
+        if (concert != null && !concerts.contains(concert)) {
+            concerts.add(concert);
+            concert.setOrganisateur(this);
+        }
+    }
+
+    public void removeConcert(Concert concert) {
+        if (concert != null && concerts.remove(concert)) {
+            concert.setOrganisateur(null);
+        }
+    }
 
     @Override
     public String toString() {
         return "Organisateur{" +
-                "nom='" + getNom() + '\'' +   // 🔹 Correction ici
+                "id=" + getId() +
+                ", nom='" + getNom() + '\'' +
                 ", prenom='" + getPrenom() + '\'' +
-                ", concerts=" + (concerts != null ? concerts.size() : "null") +
+                ", email='" + getEmail() + '\'' +
+                ", nbConcerts=" + concerts.size() +
                 '}';
     }
 }
