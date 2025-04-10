@@ -41,6 +41,7 @@ public class TestApplication extends Application {
         clazzes.add(ConcertResource .class);
         clazzes.add(OrganisateurRessource.class);
         clazzes.add(AcceptHeaderOpenApiResource.class);
+        clazzes.add(CORSFilter.class);
          
 
         return clazzes;
