@@ -126,4 +126,18 @@ public class UserRessource {
         return Response.ok(new TicketDTO(ticketToAssign)).build();
     }
 
+
+    @POST
+    @Path("/login")
+    public Response login(User userInput) {
+        List<User> users = userDao.findAll();
+        for (User u : users) {
+            if (u.getEmail().equals(userInput.getEmail()) && u.getPassword().equals(userInput.getPassword())) {
+                return Response.ok(new UserDTO(u)).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).entity("Email ou mot de passe incorrect").build();
+    }
+
+
 }
