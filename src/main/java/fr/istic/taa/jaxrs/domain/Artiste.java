@@ -11,12 +11,12 @@ public class Artiste implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String nom;
 
     private String prenom;
 
-
-
+    private String imageUrl;
     private String biographie;
 
     @OneToOne(mappedBy = "artiste", cascade = CascadeType.ALL)
@@ -25,11 +25,18 @@ public class Artiste implements Serializable {
     }
 
 
-    public Artiste(String nom, String prenom, String biographie) {
+    public Artiste(String nom, String prenom, String biographie, String imageUrl) {
         this.nom = nom;
         this.prenom = prenom;
         this.biographie = biographie;
+        this.imageUrl = imageUrl;
+    }
+   public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     // 🔹 Getters et Setters
@@ -71,6 +78,7 @@ public class Artiste implements Serializable {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", biographie='" + biographie + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }

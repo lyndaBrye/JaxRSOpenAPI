@@ -14,6 +14,14 @@ public class ConcertDTO {
     private LocalDateTime date;
     private String lieu;
     private int capacity;
+
+
+
+    private String libelle;
+
+
+
+    private String imageUrl;
     private Long artiste_id;
     private Long organisateur_id;
     private double prix; // Ajout du prix
@@ -31,6 +39,8 @@ public class ConcertDTO {
             this.artiste_id = (concert.getArtiste() != null) ? concert.getArtiste().getId() : null;
             this.organisateur_id = (concert.getOrganisateur() != null) ? concert.getOrganisateur().getId() : null;
             this.prix = concert.getPrix();
+            this.libelle = concert.getLibelle();
+            this.imageUrl = concert.getImageUrl();
         }
     }
 
@@ -43,6 +53,12 @@ public class ConcertDTO {
         // Mise à jour des champs uniquement s'ils ne sont pas nuls
         if (this.date != null) {
             existingConcert.setDate(this.date);
+        }
+        if (this.libelle != null) {
+            existingConcert.setLibelle(this.libelle);
+        }
+        if (this.imageUrl != null) {
+            existingConcert.setImageUrl(this.imageUrl);
         }
         if (this.lieu != null) {
             existingConcert.setLieu(this.lieu);
@@ -64,6 +80,20 @@ public class ConcertDTO {
     }
 
     // 🔹 Getters et Setters
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
     public Long getId() {
         return id;
     }

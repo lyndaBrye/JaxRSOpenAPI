@@ -69,7 +69,8 @@ public class ConcertResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("Artiste ou Organisateur non trouvé").build();
         }
 
-        Concert concert = new Concert(concertDTO.getDate(), concertDTO.getLieu(), concertDTO.getCapacity(),concertDTO.getPrix());
+        Concert concert = new Concert(concertDTO.getDate(), concertDTO.getLieu(), concertDTO.getCapacity(),concertDTO.getPrix(),
+                concertDTO.getLibelle(), concertDTO.getImageUrl());
         concert.setArtiste(artiste);
         concert.setOrganisateur(organisateur);
         for(int i = 0; i < concertDTO.getCapacity(); i++) {

@@ -9,16 +9,28 @@ public class ArtisteDTO{
     private String prenom;
     private String biographie;
 
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
+
     // Constructeur par défaut
     public ArtisteDTO() {
     }
 
     // Constructeur avec paramètres
-    public ArtisteDTO(Long id, String nom, String prenom, String biographie) {
+    public ArtisteDTO(Long id, String nom, String prenom, String biographie, String imageUrl) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.biographie = biographie;
+        this.imageUrl = imageUrl;
     }
 
     // Constructeur à partir de l'entité `Artiste`
@@ -28,13 +40,14 @@ public class ArtisteDTO{
             this.nom = artiste.getNom();
             this.prenom = artiste.getPrenom();
             this.biographie = artiste.getBiographie();
+            this.imageUrl = artiste.getImageUrl();
         }
     }
 
     // Conversion DTO → Entité
     public Artiste toEntity() {
 
-        return new Artiste(this.nom, this.prenom, this.biographie);
+        return new Artiste(this.nom, this.prenom, this.biographie, this.imageUrl);
     }
 
     // Getters et Setters
@@ -62,6 +75,7 @@ public class ArtisteDTO{
         this.prenom = prenom;
     }
 
+
     public String getBiographie() {
         return biographie;
     }
@@ -78,6 +92,7 @@ public class ArtisteDTO{
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", biographie='" + biographie + '\'' +
+                ", image_url='" + imageUrl + '\'' +
                 '}';
     }
 }

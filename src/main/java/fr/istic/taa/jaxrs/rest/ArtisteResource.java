@@ -69,6 +69,7 @@ public class ArtisteResource {
         artiste.setNom(artisteDTO.getNom());
         artiste.setPrenom(artisteDTO.getPrenom());
         artiste.setBiographie(artisteDTO.getBiographie());
+        artiste.setImageUrl(artisteDTO.getImageUrl());
 
         artisteDao.update(artiste);
         return Response.ok(new ArtisteDTO(artiste)).build();

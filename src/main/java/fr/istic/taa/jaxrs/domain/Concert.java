@@ -26,6 +26,19 @@ public class Concert implements Serializable {
 
     private String lieu;
     private int capacity;
+
+
+    private String libelle;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    private String imageUrl;
     private double prix;
 
     @OneToOne
@@ -42,11 +55,13 @@ public class Concert implements Serializable {
     public Concert() {
     }
 
-    public Concert(LocalDateTime date, String lieu, int capacity, double prix) {
+    public Concert(LocalDateTime date, String lieu, int capacity, double prix, String imageUrl, String libelle) {
         this.date = date;
         this.lieu = lieu;
         this.capacity = capacity;
         this.prix = prix;
+        this.libelle= libelle;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -88,6 +103,13 @@ public class Concert implements Serializable {
     public void setPrix(double prix) {
         this.prix = prix;
     }
+     public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
 
     public Artiste getArtiste() {
         return artiste;
@@ -121,6 +143,8 @@ public class Concert implements Serializable {
                 ", lieu='" + lieu + '\'' +
                 ", capacity=" + capacity +
                 ", prix=" + prix +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", libelle='" + libelle + '\'' +
                 ", artiste=" + (artiste != null ? artiste.getNom() : "null") +
                 ", organisateur=" + (organisateur != null ? organisateur.getNom() : "null") +
                 '}';

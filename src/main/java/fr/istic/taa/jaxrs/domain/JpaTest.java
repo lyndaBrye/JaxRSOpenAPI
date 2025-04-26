@@ -46,11 +46,11 @@ public class JpaTest {
 		manager.persist(organisateur);
 
 		// 🎤 Artiste
-		Artiste artiste = new Artiste("Metallica", "Metal", "Groupe de metal américain");
+		Artiste artiste = new Artiste("Metallica", "Metal", "Groupe de metal américain","https://example.com/image.jpg");
 		manager.persist(artiste);
 
 		// 🎫 Concert
-		Concert concert = new Concert(LocalDateTime.now().plusDays(20), "Parc de la Villette", 1000, 10.0);
+		Concert concert = new Concert(LocalDateTime.now().plusDays(20), "Parc de la Villette", 1000, 10.0,"https://example.com/image.jpg", "Con ");
 		concert.setOrganisateur(organisateur);
 		concert.setArtiste(artiste);
 		manager.persist(concert);
