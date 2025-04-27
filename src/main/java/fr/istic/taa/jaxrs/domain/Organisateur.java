@@ -11,12 +11,15 @@ public class Organisateur extends User {
     @OneToMany(mappedBy = "organisateur")
     private List<Concert> concerts = new ArrayList<>();
 
+    private String compagnie;
+
     public Organisateur() {
         super();
     }
 
-    public Organisateur(String nom, String prenom, String codePostal, String email, String tel, String password, int age, Sexe sexe) {
+    public Organisateur(String nom, String prenom, String codePostal, String email, String tel, String password, int age, Sexe sexe,String compagnie) {
         super(nom, prenom, codePostal, email, tel, password, age, sexe);
+        this.compagnie = compagnie;
     }
 
     public List<Concert> getConcerts() {
@@ -39,6 +42,12 @@ public class Organisateur extends User {
             concert.setOrganisateur(null);
         }
     }
+    public String getCompagnie() {
+        return compagnie;
+    }
+    public void setCompagnie(String compagnie) {
+        this.compagnie = compagnie;
+    }
 
     @Override
     public String toString() {
@@ -48,6 +57,7 @@ public class Organisateur extends User {
                 ", prenom='" + getPrenom() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", nbConcerts=" + concerts.size() +
+                ", compagnie='" + compagnie + '\'' +
                 '}';
     }
 }

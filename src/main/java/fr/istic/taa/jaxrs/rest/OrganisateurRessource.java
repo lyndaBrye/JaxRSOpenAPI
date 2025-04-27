@@ -23,7 +23,7 @@ public class OrganisateurRessource {
     @Path("/{organisateurId}")
     public Response getOrganisateurById(@PathParam("organisateurId") Long organisateurId) {
         Organisateur organisateur = organisateurDao.findOne(organisateurId);
-        if (organisateur == null) {
+        if (organisateur == null || organisateur.getCompagnie() == null || organisateur.getCompagnie().isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).entity("Organisateur non trouvé").build();
         }
         return Response.ok(organisateur).build();
@@ -54,12 +54,13 @@ public class OrganisateurRessource {
         if (existing == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Organisateur non trouvé").build();
         }
-
         organisateur.setId(organisateurId); // Conserver l'ID original
-        organisateurDao.update(organisateur);
+        if (organisateur.getCompagnie() != null) {
+            existing.setCompagnie(organisateur.getCompagnie());
+        }
+        organisateurDao.update(existing);
         return Response.ok("Organisateur mis à jour avec succès").build();
     }
-
     // Supprimer un organisateur (seulement si plus de concerts liés)
     @DELETE
     @Path("/{organisateurId}")

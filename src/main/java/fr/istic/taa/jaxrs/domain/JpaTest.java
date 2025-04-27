@@ -42,7 +42,7 @@ public class JpaTest {
 		manager.persist(user3);
 
 		// 👨‍💼 Organisateur
-		Organisateur organisateur = new Organisateur("John", "Doe", "75001", "john@example.com", "0612345678", "password", 30, Sexe.HOMME);
+		Organisateur organisateur = new Organisateur("John", "Doe", "75001", "john@example.com", "0612345678", "password", 30, Sexe.HOMME,"Life");
 		manager.persist(organisateur);
 
 		// 🎤 Artiste
