@@ -11,7 +11,6 @@ public class Artiste implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String nom;
 
     private String prenom;
@@ -19,8 +18,15 @@ public class Artiste implements Serializable {
     private String imageUrl;
     private String biographie;
 
-    @OneToOne(mappedBy = "artiste", cascade = CascadeType.ALL)
-    private Concert concert;
+   // @OneToMany(mappedBy = "artiste", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private java.util.List<Concert> concerts = new java.util.ArrayList<>();
+   /*? public java.util.List<fr.istic.taa.jaxrs.domain.Concert> getConcerts() {
+     return concerts;
+    }
+    public void setConcerts(java.util.List<fr.istic.taa.jaxrs.domain.Concert> concerts) {
+    this.concerts = concerts;
+}
+*/
     public Artiste() {
     }
 

@@ -41,7 +41,7 @@ public class Concert implements Serializable {
     private String imageUrl;
     private double prix;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "artiste_id")
     private Artiste artiste;
 

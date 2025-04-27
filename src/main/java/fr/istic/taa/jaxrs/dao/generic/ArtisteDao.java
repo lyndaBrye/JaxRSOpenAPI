@@ -6,5 +6,10 @@ public class ArtisteDao extends AbstractJpaDao<Long, Artiste> {
         super();
         setClazz(Artiste.class);
     }
+    public Artiste findByNom(String nom) {
+        return entityManager.createQuery("SELECT a FROM Artiste a WHERE a.nom = :nom", Artiste.class)
+                .setParameter("nom", nom)
+                .getSingleResult();
+    }
 
 }

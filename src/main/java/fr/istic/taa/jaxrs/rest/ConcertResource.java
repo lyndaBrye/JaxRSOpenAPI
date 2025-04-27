@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.DTO.ConcertDTO;
+import fr.istic.taa.jaxrs.DTO.ConcertDTOResponse;
 import fr.istic.taa.jaxrs.DTO.TicketDTO;
 import fr.istic.taa.jaxrs.DTO.UserDTO;
 import fr.istic.taa.jaxrs.dao.generic.*;
@@ -19,10 +20,10 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ConcertResource {
-    private ConcertDao concertDao = new ConcertDao();
-    private ArtisteDao artisteDao = new ArtisteDao();
-    private OrganisateurDao organisateurDao = new OrganisateurDao();
-    private TicketDao ticketDao = new TicketDao();
+    private final ConcertDao concertDao = new ConcertDao();
+    private final ArtisteDao artisteDao = new ArtisteDao();
+    private final OrganisateurDao organisateurDao = new OrganisateurDao();
+    private final TicketDao ticketDao = new TicketDao();
 
     @GET
     @Path("/all")
@@ -36,7 +37,7 @@ public class ConcertResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé").build();
         }
 
-        List<ConcertDTO> concertDTOS = concerts.stream().map(ConcertDTO::new).collect(Collectors.toList());
+        List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
         return Response.ok(concertDTOS).build();
     }
 
@@ -68,20 +69,20 @@ public class ConcertResource {
         if (artiste == null || organisateur == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Artiste ou Organisateur non trouvé").build();
         }
-
         Concert concert = new Concert(concertDTO.getDate(), concertDTO.getLieu(), concertDTO.getCapacity(),concertDTO.getPrix(),
-                concertDTO.getLibelle(), concertDTO.getImageUrl());
+                concertDTO.getImageUrl(),concertDTO.getLibelle());
         concert.setArtiste(artiste);
         concert.setOrganisateur(organisateur);
         for(int i = 0; i < concertDTO.getCapacity(); i++) {
             Ticket ticket = new Ticket(concert, null);
-            concert.getTickets().add(ticket); // Important : relier via la liste du concert
+            concert.getTickets().add(ticket);
         }
-
+        if (concert.getId() != null) {
+            throw new IllegalStateException("L'identifiant du concert ne doit pas être défini manuellement.");
+        }
         concertDao.save(concert);
-
-
-        return Response.status(Response.Status.CREATED).entity(new ConcertDTO(concert)).build();
+        ConcertDTOResponse concertDTOResponse = new ConcertDTOResponse(concert);
+        return Response.status(Response.Status.CREATED).entity(concertDTOResponse).build();
     }
 
     @PUT
