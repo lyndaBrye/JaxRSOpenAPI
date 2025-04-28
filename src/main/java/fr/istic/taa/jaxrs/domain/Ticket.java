@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -13,10 +14,12 @@ public class Ticket implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "concert_id")
+    @JsonBackReference(value = "concert-ticket")
     private Concert concert;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference(value = "user-ticket")
     private User user;
 
     public Ticket() {

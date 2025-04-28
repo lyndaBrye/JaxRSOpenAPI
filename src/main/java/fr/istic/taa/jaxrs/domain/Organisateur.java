@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class Organisateur extends User {
 
     @OneToMany(mappedBy = "organisateur")
+    @JsonManagedReference(value = "organisateur-concert")
     private List<Concert> concerts = new ArrayList<>();
 
     private String compagnie;

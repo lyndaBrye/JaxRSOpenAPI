@@ -1,7 +1,9 @@
 package fr.istic.taa.jaxrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -48,11 +50,12 @@ public class Concert implements Serializable {
     private Artiste artiste;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonBackReference(value = "organisateur-concert")
     @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "concert-ticket")
     private List<Ticket> tickets = new ArrayList<>();
 
     public Concert() {

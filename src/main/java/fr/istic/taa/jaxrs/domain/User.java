@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -24,6 +25,7 @@ public class User implements Serializable {
 
     // La relation OneToMany pour les tickets de l'utilisateur
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "user-ticket")
     private List<Ticket> tickets = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
