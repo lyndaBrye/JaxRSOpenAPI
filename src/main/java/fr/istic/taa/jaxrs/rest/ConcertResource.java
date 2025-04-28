@@ -1,8 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.DTO.ConcertDTO;
 import fr.istic.taa.jaxrs.DTO.ConcertDTOResponse;
-import fr.istic.taa.jaxrs.DTO.TicketDTO;
-import fr.istic.taa.jaxrs.DTO.UserDTO;
 import fr.istic.taa.jaxrs.dao.generic.*;
 import fr.istic.taa.jaxrs.domain.*;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,19 +27,14 @@ public class ConcertResource {
     @Path("/all")
     public Response getAllConcerts() {
         System.out.println("Execution de la méthode getAllConcerts()");
-
         List<Concert> concerts = concertDao.findAll();
-
         if (concerts.isEmpty()) {
             System.out.println("Aucun concert trouvé");
             return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé").build();
         }
-
         List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
         return Response.ok(concertDTOS).build();
     }
-
-
     @GET
     @Path("/{id}")
     @Operation(summary = "Trouver un concert par ID", description = "Retourne un concert en fonction de son identifiant",
@@ -58,7 +51,6 @@ public class ConcertResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Concert non trouvé").build();
         }
     }
-
     @POST
     @Operation(summary = "Ajouter un concert", description = "Ajoute un nouveau concert à la base de données",
             responses = {@ApiResponse(responseCode = "201", description = "Concert ajouté avec succès")})

@@ -106,4 +106,16 @@ public class OrganisateurRessource {
         return Response.ok("Tous les concerts de l'organisateur ont été supprimés.").build();
     }
 
+    @POST
+    @Path("/login")
+    public Response login(Organisateur organisateurInput) {
+        List<Organisateur> organisateurs = organisateurDao.findAll();
+        for (Organisateur o : organisateurs) {
+            if (o.getEmail().equals(organisateurInput.getEmail()) && o.getPassword().equals(organisateurInput.getPassword())) {
+                return Response.ok(o).build();
+            }
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).entity("Email ou mot de passe incorrect").build();
+    }
+
 }

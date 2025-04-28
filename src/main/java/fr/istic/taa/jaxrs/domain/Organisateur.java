@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("organisateur")
 @PrimaryKeyJoinColumn(name = "id")
 public class Organisateur extends User {
 

@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.DTO.ConcertDTOResponse;
 import fr.istic.taa.jaxrs.DTO.TicketDTO;
 import fr.istic.taa.jaxrs.DTO.UserDTO;
 import fr.istic.taa.jaxrs.dao.generic.TicketDao;
@@ -10,6 +11,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +56,6 @@ public class UserRessource {
         return Response.ok(userDTOS).build();
     }
 
-    // Ajouter un nouvel utilisateur
     @POST
     public Response addUser(
             @Parameter(description = "Utilisateur à ajouter", required = true) User user) {
@@ -72,13 +74,10 @@ public class UserRessource {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }
 
-        // Convertir le DTO en entité User et mettre à jour les champs existants
         User updatedUser = userDTO.toEntity(userId, existing,ticketDao);
 
-        // Sauvegarder l'utilisateur mis à jour
         userDao.update(updatedUser);
 
-        // Retourner une réponse indiquant que la mise à jour a réussi
         return Response.ok("Utilisateur mis à jour avec succès").build();
     }
 
@@ -107,24 +106,28 @@ public class UserRessource {
 
     @POST
     @Path("/{userId}/tickets/{concertId}")
-    public Response assignTicketToUser(@PathParam("userId") Long userId, @PathParam("concertId") Long concertId) {
+    public Response assignTicketToUser(@PathParam("userId") Long userId, @PathParam("concertId") Long concertId, @QueryParam("quantity") int quantity) {
         User user = userDao.findOne(userId);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }
-
         List<Ticket> availableTickets = ticketDao.findAvailableTicketsByConcertId(concertId);
-        if (availableTickets.isEmpty()) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Aucun ticket disponible pour ce concert").build();
+        if (availableTickets.size() < quantity) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Pas assez de tickets disponibles pour ce concert").build();
         }
-
-        // On prend le premier ticket libre et on l’assigne
-        Ticket ticketToAssign = availableTickets.get(0);
-        ticketToAssign.setUser(user);
-        ticketDao.update(ticketToAssign);
-
-        return Response.ok(new TicketDTO(ticketToAssign)).build();
+        // Vérifier si l'utilisateur a déjà des tickets pour ce concert
+        List<Ticket> userTickets = new ArrayList<>();
+        // Assigner les tickets à l'utilisateur
+        for (int i = 0; i < quantity; i++) {
+            Ticket ticketToAssign = availableTickets.get(i);
+            ticketToAssign.setUser(user);
+            ticketDao.update(ticketToAssign);
+            userTickets.add(ticketToAssign);
+        }
+        List<TicketDTO> tickets = userTickets.stream().map(TicketDTO::new).collect(Collectors.toList());
+        return Response.ok(tickets).build();
     }
+
 
 
     @POST

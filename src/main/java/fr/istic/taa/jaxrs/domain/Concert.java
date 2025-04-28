@@ -1,6 +1,7 @@
 package fr.istic.taa.jaxrs.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -42,10 +43,12 @@ public class Concert implements Serializable {
     private double prix;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "artiste_id")
     private Artiste artiste;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 

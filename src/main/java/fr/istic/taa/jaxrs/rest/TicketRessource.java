@@ -22,8 +22,6 @@ public class TicketRessource {
     private TicketDao ticketDao = new TicketDao();
     private ConcertDao concertDao = new ConcertDao();
     private UserDao userDao = new UserDao();
-
-    // Récupérer un ticket par ID
     @GET
     @Path("/{ticketId}")
     public Response getTicketById(@PathParam("ticketId") Long ticketId) {
@@ -44,31 +42,22 @@ public class TicketRessource {
         if (tickets == null || tickets.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).entity("Aucun ticket trouvé").build();
         }
-
-        // Transformation en DTO
         List<TicketDTO> ticketDTOs = tickets.stream()
-                .map(TicketDTO::new) // Utilise directement le constructeur TicketDTO(Ticket)
+                .map(TicketDTO::new)
                 .collect(Collectors.toList());
 
         return Response.ok(ticketDTOs).build();
     }
 
-
-
-    // Ajouter un nouveau ticket
     @POST
     public Response addTicket(TicketDTO ticketDTO) {
         if (ticketDTO == null || ticketDTO.getConcertId() == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Données invalides").build();
         }
-
-        // Récupérer l'entité Concert
         Concert concert = concertDao.findOne(ticketDTO.getConcertId());
         if (concert == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Concert non trouvé").build();
         }
-
-        // Si userId est null, ne pas récupérer d'utilisateur
         User user = null;
         if (ticketDTO.getUserId() != null) {
             user = userDao.findOne(ticketDTO.getUserId());
@@ -77,20 +66,10 @@ public class TicketRessource {
             }
         }
 
-        // Créer le ticket avec un utilisateur null si non spécifié
         Ticket ticket = new Ticket (concert, user);
-
-        // Sauvegarder le ticket dans la base de données
         ticketDao.save(ticket);
-
-        // Retourner le DTO du ticket ajouté
         return Response.status(Response.Status.CREATED).entity(new TicketDTO(ticket)).build();
     }
-
-
-
-
-    // Mettre à jour un ticket
     @PUT
     @Path("/{ticketId}")
     public Response updateTicket(@PathParam("ticketId") Long ticketId, TicketDTO ticketDTO) {
@@ -100,15 +79,13 @@ public class TicketRessource {
             return Response.status(Response.Status.NOT_FOUND).entity("Ticket non trouvé").build();
         }
 
-        // Récupérer l'ancien concert et ne le changer que si un nouvel ID est fourni
         Concert concert = existingTicket.getConcert();
         if (ticketDTO.getConcertId() != null) {
             Concert newConcert = concertDao.findOne(ticketDTO.getConcertId());
             if (newConcert == null) {
                 return Response.status(Response.Status.NOT_FOUND).entity("Concert non trouvé").build();
             }
-            concert = newConcert; // Met à jour uniquement si un nouvel ID valide est donné
-        }
+            concert = newConcert;      }
 
         // Récupérer l'ancien utilisateur et ne le changer que si un nouvel ID est fourni
         User user = existingTicket.getUser();
@@ -117,13 +94,10 @@ public class TicketRessource {
             if (newUser == null) {
                 return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
             }
-            user = newUser; // Met à jour uniquement si un nouvel ID valide est donné
-        }
+            user = newUser;    }
 
-        // Convertir le DTO en entité tout en conservant les anciennes valeurs si null
         Ticket updatedTicket = ticketDTO.toEntity(ticketId, concert, user, existingTicket);
 
-        // Mettre à jour la base de données
         ticketDao.update(updatedTicket);
 
         return Response.ok("Ticket mis à jour avec succès").build();
