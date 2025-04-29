@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class ConcertDTO {
 
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime date;
     private String lieu;
     private int capacity;
