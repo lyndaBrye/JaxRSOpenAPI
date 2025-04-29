@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +53,74 @@ public class ConcertResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Concert non trouvé").build();
         }
     }
+    @GET
+    @Path("/artiste/{artisteId}")
+    @Operation(summary = "Trouver des concerts par ID d'artiste", description = "Retourne une liste de concerts en fonction de l'identifiant de l'artiste",
+            responses = {
+                    @ApiResponse(description = "Liste des concerts", content = @Content(
+                            schema = @Schema(implementation = ConcertDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Concert non trouvé")
+            })
+    public Response getConcertsByArtisteId(@PathParam("artisteId") Long artisteId) {
+        List<Concert> concerts = concertDao.findByArtisteId(artisteId);
+        if (concerts.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé pour cet artiste").build();
+        }
+        List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
+        return Response.ok(concertDTOS).build();
+    }
+
+    @GET
+    @Path("/lieu/{lieu}")
+    @Operation(summary = "Trouver des concerts par lieu", description = "Retourne une liste de concerts en fonction du lieu",
+            responses = {
+                    @ApiResponse(description = "Liste des concerts", content = @Content(
+                            schema = @Schema(implementation = ConcertDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Concert non trouvé")
+            })
+    public Response getConcertsByLieu(@PathParam("lieu") String lieu) {
+        List<Concert> concerts = concertDao.findByLieu(lieu);
+        if (concerts.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé pour ce lieu").build();
+        }
+        List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
+        return Response.ok(concertDTOS).build();
+    }
+
+    @GET
+    @Path("/date/{date}")
+    @Operation(summary = "Trouver des concerts par date", description = "Retourne une liste de concerts en fonction de la date",
+            responses = {
+                    @ApiResponse(description = "Liste des concerts", content = @Content(
+                            schema = @Schema(implementation = ConcertDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Concert non trouvé")
+            })
+    public Response getConcertsByDate(@PathParam("date") String date) {
+        List<Concert> concerts = concertDao.findByDate(LocalDate.parse(date));
+        if (concerts.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé pour cette date").build();
+        }
+        List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
+        return Response.ok(concertDTOS).build();
+    }
+
+    @GET
+    @Path("/organisateur/{organisateurId}")
+    @Operation(summary = "Trouver des concerts par ID d'organisateur", description = "Retourne une liste de concerts en fonction de l'identifiant de l'organisateur",
+            responses = {
+                    @ApiResponse(description = "Liste des concerts", content = @Content(
+                            schema = @Schema(implementation = ConcertDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Concert non trouvé")
+            })
+    public Response getConcertsByOrganisateurId(@PathParam("organisateurId") Long organisateurId) {
+        List<Concert> concerts = concertDao.findByOrganisateurId(organisateurId);
+        if (concerts.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé pour cet organisateur").build();
+        }
+        List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());
+        return Response.ok(concertDTOS).build();
+    }
+
     @POST
     @Operation(summary = "Ajouter un concert", description = "Ajoute un nouveau concert à la base de données",
             responses = {@ApiResponse(responseCode = "201", description = "Concert ajouté avec succès")})
