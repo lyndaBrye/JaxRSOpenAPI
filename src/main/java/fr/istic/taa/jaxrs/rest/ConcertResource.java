@@ -185,4 +185,12 @@ public class ConcertResource {
                     .build();
         }
     }
+    @GET
+    @Path("/{id}/capacite-restante")
+    public Response getCapaciteRestante(@PathParam("id") Long concertId) {
+        int capaciteRestante = ticketDao.countAvailableTicketsByConcertId(concertId);
+        return Response.ok(capaciteRestante).build();
+    }
+
+
 }

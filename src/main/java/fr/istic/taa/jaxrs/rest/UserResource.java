@@ -6,7 +6,9 @@ import fr.istic.taa.jaxrs.dao.generic.TicketDao;
 import fr.istic.taa.jaxrs.dao.generic.UserDao;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.User;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -56,6 +58,12 @@ public class UserResource {
     }
 
     @POST
+    @Operation(summary = "Ajouter un utilisateur",
+            description = "Ajoute un nouvel utilisateur à la base de données",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Utilisateur ajouté avec succès"),
+                    @ApiResponse(responseCode = "400", description = "Données invalides")
+            })
     public Response addUser(
             @Parameter(description = "Utilisateur à ajouter", required = true) User user) {
         if (user == null) {
@@ -66,6 +74,12 @@ public class UserResource {
     }
     @PUT
     @Path("/{userId}")
+    @Operation(summary = "Mettre à jour un utilisateur",
+            description = "Met à jour les informations d'un utilisateur",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Utilisateur mis à jour avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            })
     public Response updateUser(@PathParam("userId") Long userId, UserDTO userDTO) {
         // Vérifier si l'utilisateur existe déjà dans la base de données
         User existing = userDao.findOne(userId);
@@ -85,6 +99,12 @@ public class UserResource {
     // Supprimer un utilisateur
     @DELETE
     @Path("/{userId}")
+    @Operation(summary = "Supprimer un utilisateur",
+            description = "Supprime un utilisateur et libère tous ses tickets",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Utilisateur supprimé avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouvé")
+            })
     public Response deleteUser(@PathParam("userId") Long userId) {
         User existing = userDao.findOne(userId);
         if (existing == null) {
@@ -105,24 +125,32 @@ public class UserResource {
 
     @POST
     @Path("/{userId}/tickets/{concertId}")
+    @Operation(summary = "Assigner des tickets à un utilisateur",
+            description = "Assigner des tickets disponibles à un utilisateur pour un concert donné",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Tickets assignés avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur ou concert non trouvé"),
+                    @ApiResponse(responseCode = "400", description = "Pas assez de tickets disponibles")
+            })
     public Response assignTicketToUser(@PathParam("userId") Long userId, @PathParam("concertId") Long concertId, @QueryParam("quantity") int quantity) {
         User user = userDao.findOne(userId);
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).entity("Utilisateur non trouvé").build();
         }
+
         List<Ticket> availableTickets = ticketDao.findAvailableTicketsByConcertId(concertId);
         if (availableTickets.size() < quantity) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Pas assez de tickets disponibles pour ce concert").build();
         }
-        // Vérifier si l'utilisateur a déjà des tickets pour ce concert
+
         List<Ticket> userTickets = new ArrayList<>();
-        // Assigner les tickets à l'utilisateur
         for (int i = 0; i < quantity; i++) {
             Ticket ticketToAssign = availableTickets.get(i);
             ticketToAssign.setUser(user);
             ticketDao.update(ticketToAssign);
             userTickets.add(ticketToAssign);
         }
+
         List<TicketDTO> tickets = userTickets.stream().map(TicketDTO::new).collect(Collectors.toList());
         return Response.ok(tickets).build();
     }

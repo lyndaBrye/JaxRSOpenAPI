@@ -139,4 +139,6 @@ public class TicketResource {
         ticketDao.deleteById(ticketId);
         return Response.ok("Ticket supprimé avec succès").build();
     }
+
+
 }
