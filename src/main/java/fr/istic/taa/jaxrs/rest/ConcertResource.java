@@ -28,10 +28,8 @@ public class ConcertResource {
     @GET
     @Path("/all")
     public Response getAllConcerts() {
-        System.out.println("Execution de la méthode getAllConcerts()");
         List<Concert> concerts = concertDao.findAll();
         if (concerts.isEmpty()) {
-            System.out.println("Aucun concert trouvé");
             return Response.status(Response.Status.NOT_FOUND).entity("Aucun concert trouvé").build();
         }
         List<ConcertDTOResponse> concertDTOS = concerts.stream().map(ConcertDTOResponse::new).collect(Collectors.toList());

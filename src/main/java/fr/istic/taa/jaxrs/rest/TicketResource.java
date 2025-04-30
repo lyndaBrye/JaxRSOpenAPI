@@ -7,7 +7,10 @@ import fr.istic.taa.jaxrs.dao.generic.UserDao;
 import fr.istic.taa.jaxrs.domain.Concert;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.User;
-import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,11 +20,18 @@ import java.util.stream.Collectors;
 @Path("tickets")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class TicketRessource {
+public class TicketResource {
 
     private TicketDao ticketDao = new TicketDao();
     private ConcertDao concertDao = new ConcertDao();
     private UserDao userDao = new UserDao();
+    @Operation(summary = "Récupérer un ticket par ID",
+            description = "Retourne un ticket selon son identifiant",
+            responses = {
+                    @ApiResponse(description = "Le ticket trouvé",
+                            content = @Content(schema = @Schema(implementation = TicketDTO.class))),
+                    @ApiResponse(responseCode = "404", description = "Ticket non trouvé")
+            })
     @GET
     @Path("/{ticketId}")
     public Response getTicketById(@PathParam("ticketId") Long ticketId) {
@@ -34,8 +44,12 @@ public class TicketRessource {
     }
 
     // Récupérer tous les tickets
+
     @GET
     @Path("/all")
+    @Operation(summary = "Récupérer tous les tickets",
+            description = "Retourne une liste de tous les tickets",
+            responses = {@ApiResponse(responseCode = "200", description = "Liste des tickets")})
     public Response getAllTickets() {
         List<Ticket> tickets = ticketDao.findAllWithConcertAndUser(); // Récupère les tickets avec leurs relations
 
@@ -50,6 +64,9 @@ public class TicketRessource {
     }
 
     @POST
+    @Operation(summary = "Ajouter un ticket",
+            description = "Achat d'un ticket pour un concert",
+            responses = {@ApiResponse(responseCode = "201", description = "Ticket ajouté avec succès")})
     public Response addTicket(TicketDTO ticketDTO) {
         if (ticketDTO == null || ticketDTO.getConcertId() == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Données invalides").build();
@@ -71,6 +88,12 @@ public class TicketRessource {
         return Response.status(Response.Status.CREATED).entity(new TicketDTO(ticket)).build();
     }
     @PUT
+    @Operation(summary = "Mettre à jour un ticket",
+            description = "Met à jour les informations d'un ticket",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Ticket mis à jour avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Ticket non trouvé")
+            })
     @Path("/{ticketId}")
     public Response updateTicket(@PathParam("ticketId") Long ticketId, TicketDTO ticketDTO) {
         // Vérifier si le ticket existe

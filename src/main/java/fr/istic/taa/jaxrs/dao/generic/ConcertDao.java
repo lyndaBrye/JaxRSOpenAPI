@@ -21,7 +21,7 @@ import java.util.List;
             query.setParameter("artisteId", artisteId);
             return query.getResultList();
         }
-        //findBylieu
+
         public List<Concert> findByLieu(String lieu) {
             TypedQuery<Concert> query = entityManager.createQuery("SELECT c FROM Concert c WHERE c.lieu like %:lieu%", Concert.class);
             query.setParameter("lieu", lieu);

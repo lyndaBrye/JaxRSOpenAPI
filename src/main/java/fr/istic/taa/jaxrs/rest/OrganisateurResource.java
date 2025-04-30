@@ -4,6 +4,8 @@ import fr.istic.taa.jaxrs.dao.generic.OrganisateurDao;
 import fr.istic.taa.jaxrs.dao.generic.TicketDao;
 import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Ticket;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -13,7 +15,7 @@ import java.util.List;
 @Path("organisateurs")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class OrganisateurRessource {
+public class OrganisateurResource {
 
     private OrganisateurDao organisateurDao = new OrganisateurDao();
     private TicketDao ticketDao = new TicketDao(); // Ajouté pour libérer les tickets
@@ -21,6 +23,12 @@ public class OrganisateurRessource {
     // Récupérer un organisateur par ID
     @GET
     @Path("/{organisateurId}")
+    @Operation(summary = "Trouver un organisateur par ID",
+            description = "Retourne un organisateur selon son identifiant",
+            responses = {
+                    @ApiResponse(description = "L'organisateur trouvé"),
+                    @ApiResponse(responseCode = "404", description = "Organisateur non trouvé")
+            })
     public Response getOrganisateurById(@PathParam("organisateurId") Long organisateurId) {
         Organisateur organisateur = organisateurDao.findOne(organisateurId);
         if (organisateur == null || organisateur.getCompagnie() == null || organisateur.getCompagnie().isEmpty()) {
@@ -29,14 +37,18 @@ public class OrganisateurRessource {
         return Response.ok(organisateur).build();
     }
 
-    // Récupérer tous les organisateurs
+@Operation(summary = "Récupérer tous les organisateurs",
+            description = "Retourne une liste de tous les organisateurs",
+            responses = {@ApiResponse(responseCode = "200", description = "Liste des organisateurs")})
     @GET
     public Response getAllOrganisateurs() {
         List<Organisateur> organisateurs = organisateurDao.findAll();
         return Response.ok(organisateurs).build();
     }
 
-    // Ajouter un nouvel organisateur
+    @Operation(summary = "Ajouter un organisateur",
+            description = "Ajoute un nouvel organisateur ",
+            responses = {@ApiResponse(responseCode = "201", description = "Organisateur ajouté avec succès")})
     @POST
     public Response addOrganisateur(Organisateur organisateur) {
         if (organisateur == null) {
@@ -46,7 +58,12 @@ public class OrganisateurRessource {
         return Response.status(Response.Status.CREATED).entity("Organisateur ajouté avec succès").build();
     }
 
-    // Mettre à jour un organisateur
+    @Operation(summary = "Mettre à jour un organisateur",
+            description = "Met à jour les informations d'un organisateur",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Organisateur mis à jour avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Organisateur non trouvé")
+            })
     @PUT
     @Path("/{organisateurId}")
     public Response updateOrganisateur(@PathParam("organisateurId") Long organisateurId, Organisateur organisateur) {
@@ -61,7 +78,13 @@ public class OrganisateurRessource {
         organisateurDao.update(existing);
         return Response.ok("Organisateur mis à jour avec succès").build();
     }
-    // Supprimer un organisateur (seulement si plus de concerts liés)
+@Operation(summary = "Supprimer un organisateur",
+            description = "Supprime un organisateur s'il n'est pas lié à des concerts",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Organisateur supprimé avec succès"),
+                    @ApiResponse(responseCode = "404", description = "Organisateur non trouvé"),
+                    @ApiResponse(responseCode = "403", description = "Impossible de supprimer l'organisateur : concerts encore associés.")
+            })
     @DELETE
     @Path("/{organisateurId}")
     public Response deleteOrganisateur(@PathParam("organisateurId") Long organisateurId) {
@@ -106,6 +129,12 @@ public class OrganisateurRessource {
         return Response.ok("Tous les concerts de l'organisateur ont été supprimés.").build();
     }
 
+    @Operation(summary = "Authentification de l'organisateur",
+            description = "Vérifie les informations d'identification de l'organisateur",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Authentification réussie"),
+                    @ApiResponse(responseCode = "401", description = "Email ou mot de passe incorrect")
+            })
     @POST
     @Path("/login")
     public Response login(Organisateur organisateurInput) {

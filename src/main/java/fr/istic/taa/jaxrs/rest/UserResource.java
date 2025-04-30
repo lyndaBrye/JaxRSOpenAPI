@@ -1,6 +1,5 @@
 package fr.istic.taa.jaxrs.rest;
 
-import fr.istic.taa.jaxrs.DTO.ConcertDTOResponse;
 import fr.istic.taa.jaxrs.DTO.TicketDTO;
 import fr.istic.taa.jaxrs.DTO.UserDTO;
 import fr.istic.taa.jaxrs.dao.generic.TicketDao;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 @Path("users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserRessource {
+public class UserResource {
 
     private UserDao userDao = new UserDao();
     private TicketDao ticketDao = new TicketDao();

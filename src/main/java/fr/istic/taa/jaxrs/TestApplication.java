@@ -35,11 +35,11 @@ public class TestApplication extends Application {
         final Set<Class<?>> clazzes = new HashSet<Class<?>>();
         clazzes.add(fr.istic.taa.jaxrs.config.JacksonConfig.class);
         clazzes.add(OpenApiResource.class);
-        clazzes.add(TicketRessource.class);
-        clazzes.add(UserRessource.class);
+        clazzes.add(TicketResource.class);
+        clazzes.add(UserResource.class);
         clazzes.add(ArtisteResource.class);
         clazzes.add(ConcertResource .class);
-        clazzes.add(OrganisateurRessource.class);
+        clazzes.add(OrganisateurResource.class);
         clazzes.add(AcceptHeaderOpenApiResource.class);
         clazzes.add(CORSFilter.class);
          

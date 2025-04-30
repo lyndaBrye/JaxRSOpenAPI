@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ArtisteResource {
     private final ArtisteDao artisteDao = new ArtisteDao();
-    // 🔹 Récupérer un artiste par ID
+
+
+    //  Récupérer un artiste par ID
     @GET
     @Path("/{id}")
     @Operation(summary = "Trouver un artiste par ID",
@@ -39,7 +41,7 @@ public class ArtisteResource {
         return Response.ok(artisteDTO).build();
     }
 
-    // 🔹 Ajouter un nouvel artiste
+    //  Ajouter un nouvel artiste
     @POST
     @Operation(summary = "Ajouter un artiste",
             description = "Ajoute un nouvel artiste à la base de données",
@@ -50,7 +52,7 @@ public class ArtisteResource {
         return Response.status(Response.Status.CREATED).entity(new ArtisteDTO(artiste)).build();
     }
 
-    // 🔹 Mettre à jour un artiste
+    // Mettre à jour un artiste
     @PUT
     @Path("/{id}")
     @Operation(summary = "Mettre à jour un artiste",
@@ -75,7 +77,7 @@ public class ArtisteResource {
         return Response.ok(new ArtisteDTO(artiste)).build();
     }
 
-    // 🔹 Supprimer un artiste
+    // Supprimer un artiste
     @DELETE
     @Path("/{id}")
     @Operation(summary = "Supprimer un artiste",
@@ -90,7 +92,7 @@ public class ArtisteResource {
         return Response.noContent().build(); // 204 No Content
     }
 
-    // 🔹 Récupérer tous les artistes
+    // Récupérer tous les artistes
     @GET
     @Operation(summary = "Lister tous les artistes",
             description = "Retourne la liste complète des artistes",
