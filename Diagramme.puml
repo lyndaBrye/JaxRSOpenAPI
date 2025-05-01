@@ -3,10 +3,6 @@
 class Ticket {
   - id
   - prix
-
-  + opération1(params): returnType
-  - opération2(params)
-  - opération3()
 }
 
 class Concert {
@@ -14,10 +10,8 @@ class Concert {
   - prix:int
   - date:date
   - lieu:string
+  - libelle:string
   - capacity:int
-  + opération1(params): returnType
-  - opération2(params)
-  - opération3()
 }
 
 class User {
@@ -30,16 +24,12 @@ class User {
   - password:string
   - age:int
   - sexe:[Homme, Femme]
-  + opération1(params): returnType
-  - opération2(params)
-  - opération3()
+
 }
 
 class Organisateur {
   - id:int
-  + opération1(params): returnType
-  - opération2(params)
-  - opération3()
+  - compagnie:string
 }
 
 class Artiste {
@@ -47,15 +37,18 @@ class Artiste {
   - Nom
   - Prenom
   - Biographie
-  + opération1(params): returnType
-  - opération2(params)
-  - opération3()
+  - Date de naissance
+  - code postal
+  - email
+  - tel
+  - password
+
 }
 
 
 Concert "1" -- "*" Ticket
 User "1" -- "*" Ticket
-Concert "1" -- "1" Artiste
+Concert "*" -- "1" Artiste
 Organisateur "1" -- "*" Concert
 Organisateur --|> User
 
