@@ -1,0 +1,613 @@
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Martin",
+  "prenom": "Alice",
+  "codePostal": "75001",
+  "email": "alice@example.com",
+  "tel": "0601020304",
+  "password": "pwd123",
+  "age": 28,
+  "sexe": "FEMME"
+}
+
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Dupont",
+  "prenom": "Bob",
+  "codePostal": "69000",
+  "email": "bob@example.com",
+  "tel": "0611223344",
+  "password": "secret",
+  "age": 35,
+  "sexe": "HOMME"
+}
+
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Durand",
+  "prenom": "Claire",
+  "codePostal": "33000",
+  "email": "claire@example.com",
+  "tel": "0622334455",
+  "password": "azerty",
+  "age": 24,
+  "sexe": "FEMME"
+}
+
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Doe",
+  "prenom": "John",
+  "codePostal": "75001",
+  "email": "john@example.com",
+  "tel": "0612345678",
+  "password": "password",
+  "age": 30,
+  "sexe": "HOMME",
+  "compagnie": "Compagnie A"
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+
+
+
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Martin",
+  "prenom": "Alice",
+  "codePostal": "75001",
+  "email": "alice@example.com",
+  "tel": "0601020304",
+  "password": "pwd123",
+  "age": 28,
+  "sexe": "FEMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Dupont",
+  "prenom": "Bob",
+  "codePostal": "69000",
+  "email": "bob@example.com",
+  "tel": "0611223344",
+  "password": "secret",
+  "age": 35,
+  "sexe": "HOMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Durand",
+  "prenom": "Claire",
+  "codePostal": "33000",
+  "email": "claire@example.com",
+  "tel": "0622334455",
+  "password": "azerty",
+  "age": 24,
+  "sexe": "FEMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Lemoine",
+  "prenom": "Julien",
+  "codePostal": "75015",
+  "email": "julien@example.com",
+  "tel": "0605060708",
+  "password": "julien2025",
+  "age": 30,
+  "sexe": "HOMME"
+}
+
+<> 2025-05-01T012930-1.201.json
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Bernard",
+  "prenom": "Sophie",
+  "codePostal": "13001",
+  "email": "sophie@example.com",
+  "tel": "0654321098",
+  "password": "sophie123",
+  "age": 26,
+  "sexe": "FEMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Lefevre",
+  "prenom": "Marc",
+  "codePostal": "29000",
+  "email": "marc@example.com",
+  "tel": "0698765432",
+  "password": "marc456",
+  "age": 40,
+  "sexe": "HOMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Pires",
+  "prenom": "Eva",
+  "codePostal": "69001",
+  "email": "eva@example.com",
+  "tel": "0609091011",
+  "password": "eva789",
+  "age": 22,
+  "sexe": "FEMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Carter",
+  "prenom": "Liam",
+  "codePostal": "44000",
+  "email": "liam@example.com",
+  "tel": "0634123456",
+  "password": "liam2025",
+  "age": 33,
+  "sexe": "HOMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Nguyen",
+  "prenom": "Hien",
+  "codePostal": "69005",
+  "email": "hien@example.com",
+  "tel": "0602334455",
+  "password": "hien123",
+  "age": 29,
+  "sexe": "FEMME"
+}
+
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "nom": "Wang",
+  "prenom": "Cheng",
+  "codePostal": "75002",
+  "email": "cheng@example.com",
+  "tel": "0611999888",
+  "password": "cheng2025",
+  "age": 27,
+  "sexe": "HOMME"
+}
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Doe",
+  "prenom": "John",
+  "codePostal": "75001",
+  "email": "john@example.com",
+  "tel": "0612345678",
+  "password": "password",
+  "age": 30,
+  "sexe": "HOMME",
+  "compagnie": "Covea"
+}
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Jones",
+  "prenom": "Sarah",
+  "codePostal": "94000",
+  "email": "sarah@example.com",
+  "tel": "0612334455",
+  "password": "jones123",
+  "age": 31,
+  "sexe": "FEMME",
+  "compagnie": "Capgemini"
+}
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Miller",
+  "prenom": "James",
+  "codePostal": "75004",
+  "email": "james@example.com",
+  "tel": "0611122334",
+  "password": "miller321",
+  "age": 36,
+  "sexe": "HOMME",
+  "compagnie": "MMA"
+}
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Smith",
+  "prenom": "David",
+  "codePostal": "13010",
+  "email": "david@example.com",
+  "tel": "0611333445",
+  "password": "smith1234",
+  "age": 45,
+  "sexe": "HOMME",
+  "compagnie": "Orange"
+}
+
+
+###
+POST http://localhost:8080/organisateurs
+Content-Type: application/json
+
+{
+  "nom": "Brown",
+  "prenom": "Linda",
+  "codePostal": "66000",
+  "email": "linda@example.com",
+  "tel": "0612555444",
+  "password": "brown567",
+  "age": 38,
+  "sexe": "FEMME",
+  "compagnie": "Compagnie EDF"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Metallica",
+  "prenom": "Metal",
+  "biographie": "Groupe de metal américain",
+  "imageUrl": "https://media.istockphoto.com/id/840458958/fr/photo/femme-jouant-de-la-guitare.webp?a=1&b=1&s=612x612&w=0&k=20&c=4J9VE95ej_9VAECmRT1da0HNSwOHYwXiTc6yTKf03RE="
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Led ",
+  "prenom": "Zeppelin",
+  "biographie": "Chanteur americain",
+  "imageUrl": "https://images.unsplash.com/photo-1474959783111-a0f551bdad25?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNoYW50ZXVyfGVufDB8fDB8fHww"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Queen",
+  "prenom": "Group",
+  "biographie": "Groupe de rock britannique",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1682600101311-1121bc732450?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2hhbnRldXJ8ZW58MHx8MHx8fDA%3D"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Mathers",
+  "prenom": "Eminem",
+  "biographie": "Rappeur américain connu pour ses textes percutants.",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1682294454494-4ec9ff727ba9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGNoYW50ZXVyfGVufDB8fDB8fHww"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Knowles",
+  "prenom": "Beyoncé",
+  "biographie": "Chanteuse pop et R&B américaine, icône mondiale.",
+  "imageUrl": "https://images.unsplash.com/photo-1603633247906-4746fea3141a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmV5b25jZXxlbnwwfHwwfHx8MA%3D%3D"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Marley",
+  "prenom": "Bob",
+  "biographie": "Chanteur reggae jamaïcain et figure emblématique du mouvement rastafari.",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1681182426594-5c89dc4f7728?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hhbnRldXJ8ZW58MHx8MHx8fDA%3D"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Van Haver",
+  "prenom": "Stromae",
+  "biographie": "Chanteur belge connu pour ses textes profonds et son style électro-pop.",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1682920140924-d8b5db318d97?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Y2hhbnRldXJ8ZW58MHx8MHx8fDA%3D"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Adkins",
+  "prenom": "Adele",
+  "biographie": "Chanteuse britannique célèbre pour ses ballades émotionnelles.",
+  "imageUrl": "https://images.unsplash.com/photo-1620256028494-764b4b8f3ac5?w=600"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Tesfaye",
+  "prenom": "The Weeknd",
+  "biographie": "Chanteur canadien de R&B et de pop alternative.",
+  "imageUrl": "https://images.unsplash.com/photo-1526218626217-dc65a29bb444?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2hhbnRldXJ8ZW58MHx8MHx8fDA%3D"
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Eilish",
+  "prenom": "Billie",
+  "biographie": "Chanteuse américaine révélée sur Internet, au style unique et sombre.",
+  "imageUrl": "https://media.istockphoto.com/id/2080779787/fr/photo/singer-of-music-band-performing-on-stage-light-and-smoke-effects.webp?a=1&b=1&s=612x612&w=0&k=20&c=p6FUWSbBbg3hgxL6r22yl1ehc8N6fmE2F_6YCoG9kvo="
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Cobain",
+  "prenom": "Kurt",
+  "biographie": "Chanteur du groupe Nirvana, icône du grunge des années 90.",
+  "imageUrl": "https://media.istockphoto.com/id/2080779787/fr/photo/singer-of-music-band-performing-on-stage-light-and-smoke-effects.webp?a=1&b=1&s=612x612&w=0&k=20&c=p6FUWSbBbg3hgxL6r22yl1ehc8N6fmE2F_6YCoG9kvo="
+}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "The Rolling Stones",
+  "prenom": "Group",
+  "biographie": "Groupe de rock emblématique britannique",
+  "imageUrl": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNoYW50ZXVyfGVufDB8fDB8fHww"}
+
+
+###
+POST http://localhost:8080/artistes
+Content-Type: application/json
+
+{
+  "nom": "Diyilem",
+  "prenom": "BASSA",
+  "biographie": "Rappeur Ivoirien",
+  "imageUrl": "https://images.unsplash.com/photo-1571310100246-e0676f359b42?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNoYW50ZXVyfGVufDB8fDB8fHww"
+}
+
+<> 2025-05-01T012937.201.json
+
+
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-07-15T21:00",
+  "lieu": "AccorHotels Arena",
+  "capacity": 25,
+  "libelle": "Concert Rock International",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1661299366011-bb9f86212bdb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvbmNlcnR8ZW58MHx8MHx8fDA%3D",
+  "artiste_id": 3,
+  "organisateur_id": 2,
+  "prix": 20.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-08-20T20:00",
+  "lieu": "Zénith de Paris",
+  "capacity": 30,
+  "libelle": "Concert Hip Hop",
+  "imageUrl": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNvbmNlcnR8ZW58MHx8MHx8fDA%3D",
+  "artiste_id": 4,
+  "organisateur_id": 5,
+  "prix": 18.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-09-10T22:00",
+  "lieu": "Bercy Arena",
+  "capacity": 20,
+  "libelle": "Soirée Pop Rock",
+  "imageUrl": "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNvbmNlcnR8ZW58MHx8MHx8fDA%3D",
+  "artiste_id": 5,
+  "organisateur_id": 1,
+  "prix": 25.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-10-05T19:30",
+  "lieu": "Stade Pierre-Mauroy",
+  "capacity": 18,
+  "libelle": "Concert de Noël",
+  "imageUrl": "http://example.com/image6.jpg",
+  "artiste_id": 1,
+  "organisateur_id": 2,
+  "prix": 22.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-11-01T18:00",
+  "lieu": "Halle Tony Garnier",
+  "capacity": 12,
+  "libelle": "Gala de Musique Classique",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1661335458798-74635c70b8a8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JvdXBlJTIwbXVzaWNhbHxlbnwwfHwwfHx8MA%3D%3D",
+  "artiste_id": 3,
+  "organisateur_id": 4,
+  "prix": 30.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2025-12-15T20:30",
+  "lieu": "Le Grand Rex",
+  "capacity": 8,
+  "libelle": "Concert Symphonique",
+  "imageUrl": "https://images.unsplash.com/photo-1563841930606-67e2bce48b78?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D",
+  "artiste_id": 2,
+  "organisateur_id": 4,
+  "prix": 35.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2026-01-10T22:00",
+  "lieu": "Olympia",
+  "capacity": 40,
+  "libelle": "Festival de Jazz",
+  "imageUrl":"https://images.unsplash.com/photo-1522158637959-30385a09e0da?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D",
+  "artiste_id": 4,
+  "organisateur_id": 4,
+  "prix": 28.0
+}
+
+
+###
+POST http://localhost:8080/concerts
+Content-Type: application/json
+
+{
+  "date": "2026-02-20T19:45",
+  "lieu": "Le Dôme de Paris",
+  "capacity": 14,
+  "libelle": "Concert Electropop",
+  "imageUrl": "https://plus.unsplash.com/premium_photo-1661306437817-8ab34be91e0c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D",
+  "artiste_id": 5,
+  "organisateur_id": 4,
+  "prix": 19.0
+}
+
+
+
+
