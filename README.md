@@ -6,12 +6,12 @@ Ce projet est une API RESTful développée en **Java avec Jakarta EE** pour la g
 
 ## ✨ Fonctionnalités principales
 
-- 🎤 **Gestion des concerts** : Création, mise à jour, suppression et consultation.
-- 👤 **Gestion des utilisateurs** : Création, mise à jour, authentification, suppression.
-- 🎟️ **Gestion des tickets** : Réservation de billets pour les concerts.
-- 🎭 **Artistes & Organisateurs** : Association des concerts avec les artistes et les organisateurs.
-- 🔐 **Authentification utilisateur** : Connexion basique via email/mot de passe.
-- 📄 **Documentation Swagger/OpenAPI** intégrée.
+-  **Gestion des concerts** : Création, mise à jour, suppression et consultation.
+-  **Gestion des utilisateurs** : Création, mise à jour, authentification, suppression.
+-  **Gestion des tickets** : Réservation de billets pour les concerts.
+-  **Artistes & Organisateurs** : Association des concerts avec les artistes et les organisateurs.
+-  **Authentification utilisateur** : Connexion basique via email/mot de passe.
+-  **Documentation Swagger/OpenAPI** intégrée.
 
 ---
 
@@ -80,11 +80,15 @@ src/main/java/fr/istic/taa/jaxrs/
 - `DELETE /users/{userId}`  
 - `POST /users/login`  
 
-### 🎟️ Tickets
+###  Tickets
 - `POST /users/{userId}/tickets/{concertId}?quantity={quantity}`  
 > Réserve une ou plusieurs places pour un utilisateur sur un concert donné.
 
----
+### . Les CORS
+Nous avons mis en place des CORS pour permettre au front de communiquer avec le back. Nous avons utilisé la
+bibliothèque **cors** pour gérer les CORS. Nous avons configuré les CORS dans la classe [CorsFilter](src/main/java/fr/istic/taa/jaxrs/CORSFilter.java)
+qui est exécutée avant chaque requête. Nous avons autorisé toutes les origines, tous les headers et toutes les méthodes
+pour simplifier le développement. 
 
 ## 🚀 Installation & Lancement
 
@@ -93,15 +97,16 @@ src/main/java/fr/istic/taa/jaxrs/
 git clone https://github.com/lyndaBrye/JaxRSOpenAPI.git
 cd JaxRSOpenAPI
 ```
+### 2. Démarrer le serveur REST
+Exécuter la classe `RestServer.java`.
 
-### 2. Lancer le serveur HSQL
-- **Windows** : Exécuter `run-hsql-server.bat`
-- **Linux/Mac** : Exécuter `run-hsql-server.sh`
+### 3. Lancer le serveur HSQL
+- **Windows** : Exécuter `./run-hsql-server.bat`
+- **Linux/Mac** : Exécuter `./run-hsql-server.sh`
 
-### 3. Démarrer le serveur REST
-Exécuter le fichier `RestServer.java`.
-
----
+Une fois le serveur lancé, vous pouvez utiliser un client comme Postman avec l'URL http://localhost:8080/ pour effectuer des requêtes.
+(Un fichier contenant des données au format JSON vous a été fourni pour faciliter les tests. )
+Vous retrouverez la liste complète des endpoints dans la section suivante, grâce à l’intégration de Swagger.
 
 ## 📄 Exécution de Swagger
 
