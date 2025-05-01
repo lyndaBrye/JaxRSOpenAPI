@@ -105,7 +105,7 @@ Exécuter la classe `RestServer.java`.
 - **Linux/Mac** : Exécuter `./run-hsql-server.sh`
 
 Une fois le serveur lancé, vous pouvez utiliser un client comme Postman avec l'URL http://localhost:8080/ pour effectuer des requêtes.
-(Un fichier contenant des données au format JSON vous a été fourni pour faciliter les tests. )
+(Un fichier contenant des données au format JSON vous a été fourni pour faciliter les tests. [Structure_de_donnees]src/main/java/fr/istic/taa/jaxrs/Structure_de_donnees.txt )
 Vous retrouverez la liste complète des endpoints dans la section suivante, grâce à l’intégration de Swagger.
 
 ## 📄 Exécution de Swagger
